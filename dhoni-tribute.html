@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MS Dhoni — Captain Cool</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Barlow+Condensed:wght@300;400;500;600;700;800&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0a0e1a;
+  --blue: #0f1e3d;
+  --mid: #162447;
+  --gold: #c9a84c;
+  --gold2: #e8cc7a;
+  --cream: #f5ede0;
+  --light: #ddd4c3;
+  --muted: #8a8070;
+  --white: #ffffff;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--navy);
+  color: var(--cream);
+  font-family: 'Barlow', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+/* ── HERO ───────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 60% 40%, rgba(201,168,76,0.12) 0%, transparent 55%),
+    radial-gradient(ellipse at 20% 80%, rgba(15,30,61,0.9) 0%, transparent 60%),
+    linear-gradient(160deg, #0a0e1a 0%, #0f1e3d 40%, #162447 70%, #0a0e1a 100%);
+  z-index: 0;
+}
+
+/* Cricket pitch lines as background texture */
+.hero-lines {
+  position: absolute; inset: 0; z-index: 0; overflow: hidden;
+}
+.hero-lines::before {
+  content: '';
+  position: absolute;
+  left: 50%; top: -10%;
+  width: 1px; height: 120%;
+  background: linear-gradient(to bottom, transparent, rgba(201,168,76,0.15), transparent);
+  transform: translateX(-50%);
+}
+.hero-lines::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: -10%;
+  height: 1px; width: 120%;
+  background: linear-gradient(to right, transparent, rgba(201,168,76,0.08), transparent);
+  transform: translateY(-50%);
+}
+
+.hero-image-wrap {
+  position: absolute;
+  right: 0; bottom: 0;
+  width: 58%;
+  height: 100%;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  mask-image: linear-gradient(to left, rgba(0,0,0,0.95) 30%, rgba(0,0,0,0.4) 60%, transparent 80%),
+              linear-gradient(to top, rgba(0,0,0,0.3) 0%, rgba(0,0,0,1) 20%);
+  -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.95) 30%, rgba(0,0,0,0.4) 60%, transparent 80%),
+                      linear-gradient(to top, rgba(0,0,0,0.3) 0%, rgba(0,0,0,1) 20%);
+  -webkit-mask-composite: destination-in;
+  mask-composite: intersect;
+}
+
+.hero-content {
+  position: relative; z-index: 2;
+  width: 100%;
+  padding: 0 6vw 80px;
+  animation: heroFadeUp 1.2s ease both;
+}
+
+@keyframes heroFadeUp {
+  from { opacity:0; transform: translateY(40px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+
+.hero-overline {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-overline::before {
+  content: '';
+  display: inline-block;
+  width: 36px; height: 1px;
+  background: var(--gold);
+}
+
+.hero-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(64px, 10vw, 130px);
+  font-weight: 700;
+  line-height: 0.88;
+  letter-spacing: -2px;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.hero-name .first { display: block; }
+.hero-name .last {
+  display: block;
+  color: var(--gold);
+  -webkit-text-stroke: 1px var(--gold);
+  opacity: 0.9;
+}
+
+.hero-epithet {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(16px, 2.5vw, 26px);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--light);
+  margin-top: 18px;
+  margin-bottom: 32px;
+  max-width: 480px;
+  line-height: 1.4;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.hstat {
+  border-left: 2px solid var(--gold);
+  padding-left: 14px;
+  animation: heroFadeUp 1.2s ease both;
+}
+.hstat:nth-child(2) { animation-delay: 0.1s; }
+.hstat:nth-child(3) { animation-delay: 0.2s; }
+.hstat:nth-child(4) { animation-delay: 0.3s; }
+.hstat-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--gold2);
+  line-height: 1;
+}
+.hstat-label {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-top: 2px;
+}
+
+.scroll-cue {
+  position: absolute;
+  bottom: 32px; right: 50%;
+  transform: translateX(50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  z-index: 3;
+  opacity: 0.4;
+  animation: bounce 2s ease-in-out infinite;
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: 'Barlow Condensed', sans-serif;
+}
+.scroll-cue svg { display: block; }
+@keyframes bounce {
+  0%,100% { transform: translateX(50%) translateY(0); }
+  50% { transform: translateX(50%) translateY(8px); }
+}
+
+/* ── SECTION BASE ───────────────────────────── */
+section { padding: 100px 6vw; }
+
+.section-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.section-label::after {
+  content: '';
+  flex: 1; max-width: 60px; height: 1px;
+  background: var(--gold);
+  opacity: 0.5;
+}
+
+.section-heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 5vw, 60px);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -1px;
+  margin-bottom: 28px;
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.85;
+  color: var(--light);
+  max-width: 680px;
+  margin-bottom: 18px;
+  font-weight: 300;
+}
+
+/* ── DIVIDER ────────────────────────────────── */
+.gold-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  opacity: 0.25;
+  margin: 0 6vw;
+  width: calc(100% - 12vw);
+}
+
+/* ── INTRO / BORN ────────────────────────────── */
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  max-width: 1200px;
+}
+
+.intro-img-wrap {
+  position: relative;
+}
+.intro-img-wrap::before {
+  content: '';
+  position: absolute;
+  top: -16px; left: -16px;
+  right: 16px; bottom: 16px;
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 4px;
+  pointer-events: none;
+}
+.intro-img {
+  width: 100%;
+  aspect-ratio: 3/5;
+  object-fit: cover;
+  border-radius: 4px;
+  filter: sepia(15%) contrast(1.05);
+  display: block;
+}
+
+.birth-tag {
+  position: absolute;
+  bottom: -20px; right: -20px;
+  background: var(--gold);
+  color: var(--navy);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 10px 18px;
+  border-radius: 2px;
+}
+
+/* ── QUOTE ────────────────────────────────── */
+.quote-section {
+  background: var(--mid);
+  padding: 80px 6vw;
+  position: relative;
+  overflow: hidden;
+}
+.quote-section::before {
+  content: '"';
+  position: absolute;
+  top: -40px; left: 4vw;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 320px;
+  font-weight: 700;
+  color: rgba(201,168,76,0.06);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+blockquote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(24px, 3.5vw, 44px);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--cream);
+  max-width: 900px;
+  line-height: 1.3;
+  position: relative;
+  z-index: 1;
+}
+blockquote cite {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-style: normal;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-top: 20px;
+  font-weight: 500;
+}
+
+/* ── ACHIEVEMENTS ─────────────────────────── */
+.achieve-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 2px;
+  margin-top: 40px;
+}
+.achieve-card {
+  background: var(--mid);
+  padding: 32px 28px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
+}
+.achieve-card:hover { background: #1c2f5a; }
+.achieve-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--gold), transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.achieve-card:hover::before { transform: scaleX(1); }
+.achieve-icon {
+  font-size: 28px;
+  margin-bottom: 14px;
+}
+.achieve-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--gold2);
+  margin-bottom: 8px;
+}
+.achieve-card p {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--muted);
+  max-width: none;
+  margin: 0;
+}
+
+/* ── IMAGE STRIP ──────────────────────────── */
+.img-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin: 0;
+}
+.strip-img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  filter: sepia(10%) contrast(1.05) brightness(0.95);
+  display: block;
+  transition: filter 0.4s, transform 0.4s;
+}
+.strip-img:hover { filter: none; transform: scale(1.02); }
+.img-strip-wrap {
+  overflow: hidden;
+  padding: 0;
+  line-height: 0;
+}
+
+/* ── LEADERSHIP ──────────────────────────── */
+.lead-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+  max-width: 1200px;
+}
+
+.pull-stat {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(60px, 8vw, 100px);
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+  letter-spacing: -3px;
+  margin-bottom: -8px;
+}
+.pull-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 32px;
+}
+
+/* ── TIMELINE ─────────────────────────────── */
+.timeline {
+  position: relative;
+  padding-left: 28px;
+  margin-top: 8px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 6px; bottom: 6px;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  opacity: 0.4;
+}
+.tl-item {
+  position: relative;
+  margin-bottom: 28px;
+}
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: -33px; top: 7px;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201,168,76,0.2);
+}
+.tl-year {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.tl-event {
+  font-size: 15px;
+  color: var(--cream);
+  font-weight: 400;
+  line-height: 1.5;
+}
+.tl-detail {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 3px;
+  line-height: 1.5;
+}
+
+/* ── LEGACY ───────────────────────────────── */
+.legacy-section {
+  background: linear-gradient(135deg, #0f1e3d 0%, #0a0e1a 100%);
+  text-align: center;
+  padding: 120px 6vw;
+}
+.legacy-section .section-label { justify-content: center; }
+.legacy-section .section-label::after { display: none; }
+.legacy-section .section-label::before {
+  content: '';
+  flex: 1; max-width: 60px; height: 1px;
+  background: var(--gold);
+  opacity: 0.5;
+}
+.legacy-section p { margin: 0 auto 18px; text-align: center; }
+.legacy-section .section-heading { text-align: center; }
+
+.legacy-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(20px, 3vw, 34px);
+  font-style: italic;
+  color: var(--gold2);
+  max-width: 700px;
+  margin: 40px auto 0;
+  line-height: 1.4;
+}
+
+/* ── FOOTER ───────────────────────────────── */
+footer {
+  background: #06080f;
+  text-align: center;
+  padding: 40px 6vw;
+  border-top: 1px solid rgba(201,168,76,0.1);
+}
+.footer-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+.footer-sub {
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: 'Barlow Condensed', sans-serif;
+}
+
+/* ── PHOTO GALLERY ────────────────────────── */
+.gallery-section { padding-bottom: 60px; }
+
+.gallery-grid {
+  column-count: 3;
+  column-gap: 16px;
+  margin-top: 32px;
+}
+.gal-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  background: var(--mid);
+  cursor: pointer;
+  break-inside: avoid;
+  margin-bottom: 16px;
+}
+.gal-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.5s ease, filter 0.4s ease;
+  filter: saturate(0.85) brightness(0.9);
+}
+.gal-item:hover img {
+  transform: scale(1.05);
+  filter: saturate(1.1) brightness(1.0);
+}
+.gal-caption {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 28px 16px 14px;
+  background: linear-gradient(to top, rgba(10,14,26,0.95), transparent);
+  font-size: 12px;
+  color: var(--light);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+.gal-item:hover .gal-caption {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .gallery-grid {
+    column-count: 2;
+    column-gap: 12px;
+  }
+  .gal-item { margin-bottom: 12px; }
+  .gal-caption { opacity: 1; transform: none; }
+}
+
+@media (max-width: 480px) {
+  .gallery-grid {
+    column-count: 1;
+  }
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── RESPONSIVE ───────────────────────────── */
+@media (max-width: 768px) {
+  .intro-grid, .lead-layout { grid-template-columns: 1fr; gap: 40px; }
+  .img-strip { grid-template-columns: repeat(3, 1fr); gap: 4px; }
+  .hero-image-wrap { width: 100%; opacity: 0.3; }
+  .hero-stats { gap: 20px; }
+  section { padding: 64px 6vw; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══════════════════════════════════════ -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-lines"></div>
+
+  <div class="hero-image-wrap">
+    <img class="hero-img"
+      src="dhoni1.jpg"
+      alt="MS Dhoni"
+      onerror="this.src='https://img.iplt20.com/ipl/IPLHeadshot2024/1.png'; this.onerror=null;">
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-overline">India's Greatest Captain</div>
+    <h1 class="hero-name">
+      <span class="first">Mahendra</span>
+      <span class="last">Dhoni</span>
+    </h1>
+    <p class="hero-epithet">The man who never lost his cool, never stopped believing,<br>and always found a way to win.</p>
+    <div class="hero-stats">
+      <div class="hstat">
+        <div class="hstat-num">16,000+</div>
+        <div class="hstat-label">Int'l Runs</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-num">3</div>
+        <div class="hstat-label">ICC Trophies</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-num">350+</div>
+        <div class="hstat-label">Dismissals</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-num">15 Yrs</div>
+        <div class="hstat-label">Int'l Career</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-cue">
+    <span>Scroll</span>
+    <svg width="14" height="20" viewBox="0 0 14 20" fill="none">
+      <path d="M7 1v14M2 11l5 5 5-5" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+</div>
+
+<!-- ══ INTRO ══════════════════════════════════════ -->
+<section>
+  <div class="intro-grid fade-in">
+    <div>
+      <div class="section-label">The Beginning</div>
+      <h2 class="section-heading">From Ranchi<br>to the World</h2>
+      <p>Born on July 7, 1981, in the dusty streets of Ranchi, Jharkhand, Mahendra Singh Dhoni was the son of a junior management employee. No silver spoon, no cricketing pedigree — just a boy who loved the game with an unmatched quiet ferocity.</p>
+      <p>He started as a goalkeeper in football before his school coach spotted something rare and redirected him to cricket. That accidental pivot would change Indian cricket forever. He worked as a Travelling Ticket Examiner at Kharagpur railway station, dreaming on platforms, waiting for his moment.</p>
+      <p>His moment came — and he seized it like only he could.</p>
+    </div>
+    <div class="intro-img-wrap">
+      <img class="intro-img"
+        src="dhoni1.jpg"
+        alt="MS Dhoni"
+        onerror="this.src='https://staticg.sportskeeda.com/editor/2023/03/c10b8-16790698937133-1920.jpg'; this.onerror=null;">
+      <div class="birth-tag">Born July 7, 1981 · Ranchi</div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- ══ QUOTE 1 ════════════════════════════════════ -->
+<div class="quote-section">
+  <blockquote class="fade-in">
+    "If the wickets are falling at the other end, my job is to see the team through. I never think about what I want, I think about what the team needs."
+    <cite>— M.S. Dhoni</cite>
+  </blockquote>
+</div>
+
+<!-- ══ IMAGE STRIP ════════════════════════════════ -->
+<div class="img-strip-wrap">
+  <div class="img-strip">
+    <img class="strip-img"
+      src="dhoni3.jpg"
+      alt="Dhoni helicopter shot"
+      onerror="this.src='https://staticg.sportskeeda.com/editor/2022/05/5dc14-16530829881908-1920.jpg'; this.onerror=null;">
+    <img class="strip-img"
+      src="dhoni2.jpg"
+      alt="Dhoni 2011 World Cup winning six"
+      onerror="this.src='https://staticg.sportskeeda.com/editor/2023/03/c10b8-16790698937133-1920.jpg'; this.onerror=null;">
+    <img class="strip-img"
+      src="dhoni4.jpg"
+      alt="Dhoni fastest stumping"
+      onerror="this.src='https://staticg.sportskeeda.com/editor/2022/05/5dc14-16530829881908-1920.jpg'; this.onerror=null;">
+  </div>
+</div>
+
+<!-- ══ PHOTO GALLERY ══════════════════════════════ -->
+<section class="gallery-section">
+  <div class="fade-in">
+    <div class="section-label">Moments in Time</div>
+    <h2 class="section-heading">Through the Lens</h2>
+  </div>
+  <div class="gallery-grid fade-in">
+    <div class="gal-item">
+      <img src="dhoni3.jpg"
+        alt="Dhoni helicopter shot"
+        onerror="this.src='https://staticg.sportskeeda.com/editor/2023/03/c10b8-16790698937133-1920.jpg'; this.onerror=null;">
+      <div class="gal-caption">The Helicopter Shot — his signature stroke</div>
+    </div>
+    <div class="gal-item">
+      <img src="dhoni2.jpg"
+        alt="2011 World Cup winning six"
+        onerror="this.src='https://staticg.sportskeeda.com/editor/2022/05/5dc14-16530829881908-1920.jpg'; this.onerror=null;">
+      <div class="gal-caption">The six that won India the 2011 World Cup</div>
+    </div>
+    <div class="gal-item">
+      <img src="dhoni5.jpg"
+        alt="MS Dhoni Legend"
+        onerror="this.src='https://staticg.sportskeeda.com/editor/2023/03/c10b8-16790698937133-1920.jpg'; this.onerror=null;">
+      <div class="gal-caption">The legend of MS Dhoni — Ranchi's proud son</div>
+    </div>
+    <div class="gal-item">
+      <img src="dhoni4.jpg"
+        alt="Dhoni stumping"
+        onerror="this.src='https://staticg.sportskeeda.com/editor/2022/05/5dc14-16530829881908-1920.jpg'; this.onerror=null;">
+      <div class="gal-caption">Lightning-fast stumping — a keeper's masterclass</div>
+    </div>
+    <div class="gal-item">
+      <img src="dhoni1.jpg"
+        alt="MS Dhoni CSK"
+        onerror="this.src='https://staticg.sportskeeda.com/editor/2023/03/c10b8-16790698937133-1920.jpg'; this.onerror=null;">
+      <div class="gal-caption">Captain of Chennai Super Kings — yellow army leader</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ACHIEVEMENTS ════════════════════════════════ -->
+<section>
+  <div class="fade-in">
+    <div class="section-label">Honours & Records</div>
+    <h2 class="section-heading">A Cabinet Full<br>of Glory</h2>
+  </div>
+  <div class="achieve-grid fade-in">
+    <div class="achieve-card">
+      <div class="achieve-icon">🏆</div>
+      <div class="achieve-title">ICC World Cup 2011</div>
+      <p>Led India to their second ODI World Cup title on home soil. His iconic six off Nuwan Kulasekara is one of cricket's most replayed moments, sealing a 6-wicket victory against Sri Lanka in Mumbai.</p>
+    </div>
+    <div class="achieve-card">
+      <div class="achieve-icon">🌟</div>
+      <div class="achieve-title">ICC T20 World Cup 2007</div>
+      <p>As a young captain leading India in the inaugural T20 World Cup in South Africa, Dhoni made the inspired decision to hand the last over to Joginder Sharma — and India won by 5 runs. A gamble only he would take.</p>
+    </div>
+    <div class="achieve-card">
+      <div class="achieve-icon">🏅</div>
+      <div class="achieve-title">ICC Champions Trophy 2013</div>
+      <p>India beat England in the final to become the first team to hold all three ICC limited-overs trophies simultaneously — a feat never achieved before or since. Dhoni stands alone at the top of ICC tournament wins as captain.</p>
+    </div>
+    <div class="achieve-card">
+      <div class="achieve-icon">🏏</div>
+      <div class="achieve-title">IPL Legacy with CSK</div>
+      <p>Under Dhoni, Chennai Super Kings have won 5 IPL titles, made 10 finals in 14 seasons, and became the most consistent franchise in cricket. "Whistle Podu" isn't just a chant — it's a philosophy he embodies.</p>
+    </div>
+    <div class="achieve-card">
+      <div class="achieve-icon">🧤</div>
+      <div class="achieve-title">Greatest Wicketkeeper</div>
+      <p>Lightning-fast stumpings, laser-precise run-outs, and over 350 international dismissals. His lightning stumping of Sreesanth in the 2007 T20 WC semi-final is one of the quickest ever recorded on camera.</p>
+    </div>
+    <div class="achieve-card">
+      <div class="achieve-icon">🎖️</div>
+      <div class="achieve-title">Padma Bhushan & More</div>
+      <p>Awarded the Rajiv Gandhi Khel Ratna (India's highest sports honour), Padma Shri, and Padma Bhushan. He holds an honorary rank of Lieutenant Colonel in the Indian Territorial Army — a cricketer who served his country in every arena.</p>
+    </div>
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- ══ LEADERSHIP ════════════════════════════════ -->
+<section>
+  <div class="lead-layout fade-in">
+    <div>
+      <div class="section-label">The Captain</div>
+      <h2 class="section-heading">Ice in His<br>Veins</h2>
+      <p>What separated Dhoni from every other captain India has had was not just tactics — it was temperament. In the 2011 World Cup final, he promoted himself above in-form batsmen to face Lanka's spinners. He walked in at No.5 when the game was finely balanced, and finished unbeaten on 91*. The team first. Always.</p>
+      <p>He read the game like a chess grandmaster, two moves ahead of everyone else, yet wore the calm face of a man sitting by a river. Bowlers trusted him. Batsmen believed in him. Fielders ran harder with him watching.</p>
+      <p>His nickname "Captain Cool" wasn't PR — it was earned in the crucible of a billion expectations, game after pressure-filled game.</p>
+    </div>
+    <div>
+      <div class="pull-stat">92%</div>
+      <div class="pull-label">Win rate in chases under his captaincy (ODIs)</div>
+
+      <div class="section-label" style="margin-top:0; margin-bottom: 16px;">Career Milestones</div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-year">2004</div>
+          <div class="tl-event">International Debut</div>
+          <div class="tl-detail">ODI debut vs Bangladesh in Chittagong. Scored 0 but announced his presence with razor-sharp keeping.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2005</div>
+          <div class="tl-event">183* vs Sri Lanka</div>
+          <div class="tl-detail">Highest ODI score by a wicketkeeper-batsman at the time. Jamshedpur erupted. India took notice.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2007</div>
+          <div class="tl-event">T20 World Cup Captain</div>
+          <div class="tl-detail">Named captain of India's first-ever T20 World Cup squad — and brought home the trophy.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2011</div>
+          <div class="tl-event">World Cup & Test No.1</div>
+          <div class="tl-detail">Led India to ODI World Cup glory AND to No.1 Test ranking for the first time in history.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2013</div>
+          <div class="tl-event">ICC Champions Trophy</div>
+          <div class="tl-detail">India crowned undisputed world champions across all ICC formats. An unmatched triple crown.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2020</div>
+          <div class="tl-event">International Retirement</div>
+          <div class="tl-detail">Announced retirement on August 15 — Independence Day — in a post with no words. A fitting, quiet exit.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ QUOTE 2 ════════════════════════════════════ -->
+<div class="quote-section">
+  <blockquote class="fade-in">
+    "He showed an entire nation that where you come from doesn't determine how far you can go. He came from nowhere and took us everywhere."
+    <cite>— Harsha Bhogle, Cricket Commentator</cite>
+  </blockquote>
+</div>
+
+<!-- ══ LEGACY ═════════════════════════════════════ -->
+<section class="legacy-section">
+  <div class="section-label fade-in">The Legend</div>
+  <h2 class="section-heading fade-in">What He Means<br>to India</h2>
+  <p class="fade-in">Dhoni was more than a cricketer. He was a symbol. For the boy in a small town with a big dream, he was proof. For the CSK fan who believes no match is over until the last ball, he is faith. For every student of leadership, he is a textbook. He never raised his voice on the field, never blamed a teammate, never celebrated an opponent's downfall.</p>
+  <p class="fade-in">He retired quietly, without fanfare, the same way he lived — on his own terms, in his own time, answerable to no one but his own values. He gave Indian cricket its golden era, then stepped aside without looking back.</p>
+  <p class="fade-in">The helicopter shot will be watched by grandchildren who never saw him play live. The six that won the 2011 final will be replayed as long as cricket is played in this country. And long after every statistic is forgotten, what will remain is the feeling — the absolute, bone-deep certainty that when Dhoni was at the crease, India would find a way.</p>
+  <div class="legacy-quote fade-in">"Some people are born to play a sport. Dhoni was born to define one."</div>
+</section>
+
+<!-- ══ FOOTER ═════════════════════════════════════ -->
+<footer>
+  <div class="footer-name">Mahendra Singh Dhoni</div>
+  <div class="footer-sub">1981 – Forever · Captain Cool · Ranchi's Pride · India's Greatest</div>
+</footer>
+
+<script>
+  // Scroll-triggered fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
