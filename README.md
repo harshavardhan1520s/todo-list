@@ -1,5 +1,5 @@
 # Tasko - Daily Task Manager
-r]]\\
+
 
 Tasko is a modern and elegant task management web application designed to help users organize their daily activities efficiently. It provides a clean interface for creating, managing, and tracking tasks with real-time statistics and persistent storage.
 
